@@ -1,0 +1,18 @@
+
+<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"
+ \"http://www.w3.org/TR/html4/strict.dtd\">
+<HTML>
+			   
+	<BODY>
+		<center>
+			<table border=2 width=50% >
+				<tr><td>Date</td><td>Hostname</td><td>Ip</td><td>Type</td></tr>
+				<% dates.each_with_index do |date,index|%>
+					<tr> <td> <%= date %> </td> <td> <%= @hostnames[index]%> </td> <td> <%= @ips[index] %> </td> <td> <%= @types[index] %> </td> </tr>
+				<% end %>
+			</table>
+		</center>
+			  
+	</BODY>
+</HTML>
+
