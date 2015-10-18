@@ -2,6 +2,30 @@ require_relative "zeustracker"
 
 require 'erb'
 
+
+class Record
+
+	DATE_SCORE=10
+	TYPE_SCORE=15
+	IP_SCORE=20
+
+	attr_accessor :ip
+	attr_accessor :dates
+	attr_accessor :hostname
+	attr_accessor :score
+	attr_accessor :type
+#hostnames={hostname: type}
+
+	def initialize(hostname,source_score)
+		@hostname = hostname
+		@score = source_score
+	end
+
+	def count_score
+		if 
+	end
+end
+
 class Aggregator
 
 	attr_accessor :ips
