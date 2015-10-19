@@ -1,82 +1,52 @@
 require 'nokogiri'
 require 'open-uri'
+require_relative 'record'
 
 class Cctracker
 
-	HTML = "http://cybercrime-tracker.net/"
+	HTML = "http://cybercrime-tracker.net"
 	DATES = 0
 	TYPES = 3
 	HOSTNAMES = 1
 	IPS = 2
 
+	SOURCE_SCORE = 10
 
-	attr_accessor :ips
-	attr_accessor :dates
-	attr_accessor :types
-	attr_accessor :hostnames
-
+	attr_accessor :records
+	attr_accessor :html
+	
 	def initialize
-		@ips = []
-		@dates = []
-		@types = []
-		@hostnames = []
+		@records = []
+		@skip = 0
+		@mass = 100
+		@html = "#{HTML}/index.php?#{URI.encode_www_form({"s"=>@skip,"m"=>@mass})}"
+	end
+
+	def get_more
+		#formatted_skip = URI.encode_www_form(  )
+		#@skip += 100
+		#return formatted_skip
+	end
+
+	def reset_counter
+		@skip = 0
 	end
 
 	def parse_sources
-		page = Nokogiri::HTML(open(HTML))
+		page = Nokogiri::HTML(open(html))
 		table_with_data = page.css("table").first
 		table_with_data.css("tr").each_with_index do |row,index|
 			next if index == 0
-			# get_ips(row)
-			# get_dates(row)
-			# get_types(row)
-			# get_hostnames(row)
 			row_tds = row.css("td")
-			@dates << row_tds[DATES].text
-			@types << row_tds[TYPES].text
-			@hostnames << row_tds[HOSTNAMES].text
-			@ips << row_tds[IPS].css("a").text
+			values = {}
+			values["date"] = row_tds[DATES].text
+			values["type"] = row_tds[TYPES].text
+			values["hostname"] = row_tds[HOSTNAMES].text
+			values["ip"] = row_tds[IPS].css("a").text
+			values["source"] = Cctracker
+			@records << Record.new(values)
 		end
 	end
 
-# 	def get_ips(row)
-# #		table_with_ips.css("tr").each_with_index do |row,index|
-# #			next if index == 0
-# #			columns = row.css("td")
-# #			ip_cell = columns [3]
-# #			ip_data = ip_cell.css("a").text
-# #			@ips << ip_data
-# #		end
-# 		ip_data = row.css("td")[3].css("a").text
-# 		@ips << ip_data
-		
-#   #       File.open("table.html", "w") do |f|
-# 		# 	f.write(table_with_ips)
-# 		# end
-# 	end
 
-# 	def get_dates(row)
-# 		dates_data = row.css("td")[0].text
-# 		@dates << dates_data
-# 	end
-
-# 	def get_types(row)
-# 		types_data = row.css("td")[1].text
-# 		@types << types_data
-# 	end
-
-# 	def get_hostnames(row)
-# 		hostnames_data = row.css("td")[2].text
-# 		@hostnames << hostnames_data
-# 	end
-
-	def print_as_table
-		dates.each_with_index do |date,index|
-			puts "#{date}  #{@hostnames[index]}  #{@ips[index]}   #{@types[index]}"
-		end
-	end
-
-	
-	
-	
 end
