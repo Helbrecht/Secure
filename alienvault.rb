@@ -17,17 +17,17 @@ class Alienvault
 
 	def parse_sources
 		text = open(HTML).read
-		line_count=0
+		line_count = 0
 		text.each_line do |line|
-			line_count+=1
-			next if line_count<9
-			x=line.split(" ")
+			line_count += 1
+			next if line_count < 9
+			info = line.split(" ")
 			values = {}
-			values["type"] = x[TYPES]
-			values["ip"] = x[IPS]
+			values["type"] = info[TYPES]
+			values["ip"] = info[IPS]
 			values["source"] = Alienvault
 			@records << Record.new(values)
-			break if line_count==20
+			break if line_count == 20
 		end
 	end
 end
