@@ -1,5 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
+require_relative 'record'
 
 class Zeustracker
 
@@ -8,31 +9,32 @@ class Zeustracker
 	TYPES = 1
 	HOSTNAMES = 2
 	IPS = 3
+	SOURCE_SCORE = 10
 
-
-	attr_accessor :ips
-	attr_accessor :dates
-	attr_accessor :types
-	attr_accessor :hostnames
+	attr_accessor :records
+	attr_accessor :html
 
 	def initialize
-		@ips = []
-		@dates = []
-		@types = []
-		@hostnames = []
+		@records = []
 	end
 
 	def parse_sources
-
 		page = Nokogiri::HTML(open(HTML))
 		table_with_data = page.css("table") [1]
 		table_with_data.css("tr").each_with_index do |row,index|
 			next if index == 0
 			row_tds = row.css("td")
-			@dates << row_tds[DATES].text
-			@types << row_tds[TYPES].text
-			@hostnames << row_tds[HOSTNAMES].text
-			@ips << row_tds[IPS].css("a").text
+			values = {}
+			values["date"] = row_tds[DATES].text
+			values["type"] = row_tds[TYPES].text
+			values["hostname"] = row_tds[HOSTNAMES].text
+			values["ip"] = row_tds[IPS].css("a").text
+			values["source"] = Zeustracker
+			@records << Record.new(values)
+			# @dates << row_tds[DATES].text
+			# @types << row_tds[TYPES].text
+			# @hostnames << row_tds[HOSTNAMES].text
+			# @ips << row_tds[IPS].css("a").text
 		end
 	end
 end
