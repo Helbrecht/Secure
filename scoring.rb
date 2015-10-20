@@ -1,5 +1,6 @@
 require_relative "record"
 require_relative "cctracker"
+require_relative "alienvault"
 
 class Scoring
 	

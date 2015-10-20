@@ -11,9 +11,9 @@ class Visualizer
 					<BODY>
 						<center>
 							<table border=2 width=50% >
-								<tr><td>Date</td><td>Hostname</td><td>Ip</td><td>Type</td><td>Score</td></tr>
+								<tr><td>Date</td><td>Hostname</td><td>Ip</td><td>Type</td><td>Source</td><td>Score</td></tr>
 								<% records.each do |record|%>
-									<tr> <td> <%= record.date %> </td> <td> <%= record.hostname%> </td> <td> <%= record.ip %> </td> <td> <%= record.type %> </td> <td> <%= record.score %> </td> </tr>
+									<tr> <td> <%= record.date %> </td> <td> <%= record.hostname%> </td> <td> <%= record.ip %> </td> <td> <%= record.type %> </td>  <td> <%= record.source::HTML %> </td> <td> <%= record.score %> </td> </tr>
 								<% end %>
 							</table>
 						</center>
