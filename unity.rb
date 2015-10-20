@@ -3,6 +3,7 @@ require_relative "aggregator"
 require_relative "cctracker"
 require_relative "alienvault"
 require_relative "bambenek"
+require_relative "malvare_domain_urls"
 
 # puts "ip_stealer started"
 # 
@@ -27,5 +28,9 @@ aggregator.add_records (zeus_stealer.records)
 bamb_stealer = Bambenek.new
 bamb_stealer.parse_sources
 aggregator.add_records (bamb_stealer.records)
+
+mdu_stealer = MalvareDomainUrls.new
+mdu_stealer.parse_sources
+aggregator.add_records (mdu_stealer.records)
 
 aggregator.render_to_html
