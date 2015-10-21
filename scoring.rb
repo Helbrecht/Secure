@@ -1,9 +1,9 @@
 require_relative "record"
-require_relative "cctracker"
-require_relative "alienvault"
-require_relative "zeustracker"
-require_relative "bambenek"
-require_relative "malvare_domain_urls"
+require_relative "parsers/cctracker"
+require_relative "parsers/alienvault"
+require_relative "parsers/zeustracker"
+require_relative "parsers/bambenek"
+require_relative "parsers/malvare_domain_urls"
 
 class Scoring
 	
