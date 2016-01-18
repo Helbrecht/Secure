@@ -25,7 +25,8 @@ class Aggregator
 	end
 
 	def render_to_html
-		Visualizer.render_to_html(@records)
+		@records.sort! { |a,b| a.score <=> b.score }
+		Visualizer.render_to_html(@records.reverse)
 	end
 
 	def count_score(records)

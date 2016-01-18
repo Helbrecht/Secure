@@ -8,7 +8,7 @@ class Bambenek
 	DATES = 2
 	TYPES = 1
 	HOSTNAMES = 0
-	SOURCE_SCORE = 10
+	SOURCE_SCORE = 0.5
 	
 	attr_accessor :records
 

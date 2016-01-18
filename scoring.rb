@@ -8,9 +8,9 @@ require_relative "parsers/malvare_domain_urls"
 class Scoring
 	
 	DATE_SCORE = 10
-	HOST_SCORE = 10
-	TYPE_SCORE = 15
-	IP_SCORE = 20
+	HOST_SCORE = 20
+	TYPE_SCORE = 20
+	IP_SCORE = 50
 
 	def self.count_score (records)
 		records.each do |record|
@@ -25,7 +25,7 @@ class Scoring
 		score += record.hostname.nil? ? 0 : HOST_SCORE
 		score += record.type.nil? ? 0 : TYPE_SCORE
 		score += ( record.ip.nil? || record.ip == "" ) ? 0 : IP_SCORE
-		score += get_score_for_source(record)
+		score *= get_score_for_source(record)
 		record.score = score
 	end
 

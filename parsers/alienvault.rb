@@ -7,7 +7,7 @@ class Alienvault
 	HTML = "http://reputation.alienvault.com/reputation.generic"
 	TYPES = 2
 	IPS = 0
-	SOURCE_SCORE = 10
+	SOURCE_SCORE = 0.75
 	
 	attr_accessor :records
 

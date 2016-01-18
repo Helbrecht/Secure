@@ -10,7 +10,7 @@ class Cctracker
 	HOSTNAMES = 1
 	IPS = 2
 
-	SOURCE_SCORE = 10
+	SOURCE_SCORE = 1.0
 
 	attr_accessor :records
 	attr_accessor :html

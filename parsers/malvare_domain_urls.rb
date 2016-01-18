@@ -9,7 +9,7 @@ class MalvareDomainUrls
 	HOSTNAMES = 1
 	IPS = 2
 
-	SOURCE_SCORE = 10
+	SOURCE_SCORE = 0.9
 
 	attr_accessor :records
 	attr_accessor :html

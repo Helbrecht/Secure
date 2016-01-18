@@ -9,7 +9,7 @@ class Zeustracker
 	TYPES = 1
 	HOSTNAMES = 2
 	IPS = 3
-	SOURCE_SCORE = 10
+	SOURCE_SCORE = 1.0
 
 	attr_accessor :records
 	attr_accessor :html
